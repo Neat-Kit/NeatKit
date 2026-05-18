@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Free photo to scanned PDF converter. Take a photo or upload an image of handwritten notes, documents or receipts and convert to a scanned-looking PDF. No upload.">
+<title>Photo to Scanned PDF — Neatkit</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --grad:linear-gradient(135deg,#b8c4e8,#cfc0dd,#e8cdb0);
+  --bg:#fff;--bg2:#f7f7fb;--bg3:#f0f0f7;
+  --glass:rgba(255,255,255,0.75);
+  --text:#1a1a2e;--text2:#5a5a7a;--text3:#9898b8;
+  --border:rgba(180,180,220,0.35);--border2:rgba(180,180,220,0.6);
+  --accent:#7b8fd4;--accent-light:rgba(123,143,212,0.1);
+  --success:#22c55e;--error:#ef4444;
+  --shadow-sm:0 1px 3px rgba(100,100,160,0.08);
+  --shadow-md:0 4px 16px rgba(100,100,160,0.10);
+  --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:24px;
+  --sans:'Plus Jakarta Sans',system-ui,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+body{background:var(--bg2);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;min-height:100vh}
+nav{position:sticky;top:0;z-index:200;background:var(--glass);backdrop-filter:blur(16px) saturate(180%);border-bottom:1px solid rgba(255,255,255,0.9);padding:0 2rem;display:flex;align-items:center;height:60px;gap:1rem}
+.logo{display:flex;align-items:center;gap:0.625rem;text-decoration:none;font-weight:700;font-size:1.1rem;color:var(--text)}
+.logo-mark{width:30px;height:30px;background:var(--grad);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px}
+.breadcrumb{color:var(--text3);font-size:0.82rem;display:flex;align-items:center;gap:0.4rem}
+.breadcrumb a{color:var(--accent);text-decoration:none}
+.page{max-width:900px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+h1{font-size:1.875rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:0.4rem}
+.subtitle{color:var(--text2);font-size:0.925rem;margin-bottom:2rem}
+
+/* INPUT OPTIONS */
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.input-card{background:var(--bg);border:2px dashed var(--border2);border-radius:var(--r-xl);padding:2rem;text-align:center;cursor:pointer;transition:all 0.2s;position:relative}
+.input-card:hover{border-color:var(--accent);background:var(--accent-light)}
+.input-card input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.input-icon{font-size:2rem;margin-bottom:0.75rem}
+.input-title{font-weight:700;font-size:0.95rem;margin-bottom:0.3rem}
+.input-sub{font-size:0.78rem;color:var(--text3)}
+.camera-btn{background:var(--grad);color:white;border:none;border-radius:100px;padding:0.625rem 1.25rem;font-family:var(--sans);font-weight:700;font-size:0.875rem;cursor:pointer;margin-top:0.75rem;display:inline-block}
+
+/* PAGES LIST */
+.pages-section{margin-bottom:1.5rem}
+.pages-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.875rem}
+.pages-title{font-size:0.875rem;font-weight:700;color:var(--text2)}
+.pages-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0.75rem}
+.page-card{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r-md);overflow:hidden;position:relative;cursor:grab}
+.page-card:active{cursor:grabbing}
+.page-card.dragging{opacity:0.4}
+.page-card.drag-target{border-color:var(--accent)}
+.page-thumb-wrap{position:relative;background:repeating-conic-gradient(#ebebf5 0% 25%,#f7f7fb 0% 50%) 0 0/16px 16px}
+.page-thumb{width:100%;aspect-ratio:0.707;object-fit:cover;display:block}
+.page-foot{padding:0.45rem 0.625rem;display:flex;align-items:center;justify-content:space-between}
+.page-num{font-family:var(--mono);font-size:0.68rem;color:var(--text3)}
+.page-del{background:none;border:none;color:var(--text3);cursor:pointer;font-size:0.9rem;line-height:1;transition:color 0.12s}
+.page-del:hover{color:var(--error)}
+
+/* SCAN SETTINGS */
+.settings{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r-lg);padding:1.25rem 1.5rem;margin-bottom:1.5rem}
+.settings-title{font-size:0.72rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1rem}
+.settings-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.25rem}
+.setting-group{display:flex;flex-direction:column;gap:0.4rem}
+.setting-label{font-size:0.78rem;font-weight:600;color:var(--text2)}
+.seg-btns{display:flex;background:var(--bg3);border-radius:var(--r-sm);padding:3px;gap:2px;flex-wrap:wrap}
+.seg-btn{background:transparent;border:none;color:var(--text2);font-family:var(--sans);font-size:0.75rem;font-weight:600;padding:0.35rem 0.75rem;border-radius:6px;cursor:pointer;transition:all 0.15s}
+.seg-btn.active{background:var(--bg);color:var(--text);box-shadow:var(--shadow-sm)}
+
+/* BEFORE/AFTER */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;display:none}
+.compare-box{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.compare-head{padding:0.625rem 1rem;border-bottom:1px solid var(--border);font-size:0.72rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.06em}
+.compare-img{width:100%;max-height:280px;object-fit:contain;display:block;background:repeating-conic-gradient(#ebebf5 0% 25%,#f7f7fb 0% 50%) 0 0/16px 16px}
+
+.actions{display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center}
+.btn-primary{display:inline-flex;align-items:center;gap:0.5rem;background:var(--grad);color:white;font-family:var(--sans);font-size:0.9rem;font-weight:700;padding:0.875rem 2rem;border-radius:100px;border:none;cursor:pointer;box-shadow:var(--shadow-sm);transition:box-shadow 0.15s,transform 0.15s}
+.btn-primary:hover:not(:disabled){box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.btn-primary:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+.btn-outline{display:inline-flex;align-items:center;gap:0.5rem;background:transparent;color:var(--text2);font-family:var(--sans);font-size:0.875rem;font-weight:600;padding:0.875rem 1.5rem;border-radius:100px;border:1.5px solid var(--border2);cursor:pointer;transition:all 0.15s}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.progress-wrap{display:none;flex:1;min-width:200px}
+.progress-track{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:var(--grad);border-radius:4px;transition:width 0.3s;width:0%}
+.progress-label{font-size:0.75rem;color:var(--text3);margin-top:0.35rem;font-family:var(--mono)}
+.result-card{background:var(--bg);border:1.5px solid rgba(34,197,94,0.3);border-radius:var(--r-xl);padding:2rem;margin-top:2rem;text-align:center;display:none}
+
+/* Camera modal */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:500;display:flex;align-items:center;justify-content:center;display:none}
+.modal{background:var(--bg);border-radius:var(--r-xl);padding:1.5rem;max-width:520px;width:100%;position:relative}
+.modal-title{font-weight:700;font-size:1.05rem;margin-bottom:1rem}
+#camera-video{width:100%;border-radius:var(--r-lg);background:#000}
+.modal-actions{display:flex;gap:0.75rem;margin-top:1rem;flex-wrap:wrap}
+
+@media(max-width:600px){
+  nav{padding:0 1rem}.page{padding:1.5rem 1rem 3rem}h1{font-size:1.5rem}
+  .input-row{grid-template-columns:1fr}
+  .compare{grid-template-columns:1fr}
+  .actions{flex-direction:column}.btn-primary,.btn-outline{width:100%;justify-content:center}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="../index.html"><div class="logo-mark">✦</div>Neatkit</a>
+  <div class="breadcrumb"><span>/</span><a href="../index.html">tools</a><span>/</span><span style="color:var(--text2)">photo-to-pdf</span></div>
+</nav>
+
+<div class="page">
+  <h1>Photo to Scanned PDF</h1>
+  <p class="subtitle">Take a photo of handwritten notes, receipts, or documents with your phone camera, or upload images — and get a clean scanned-looking PDF. No app needed.</p>
+
+  <div class="input-row">
+    <div class="input-card">
+      <input type="file" accept="image/*" multiple onchange="loadFiles(this.files)">
+      <div class="input-icon">🖼️</div>
+      <div class="input-title">Upload images</div>
+      <div class="input-sub">JPG, PNG, WebP · Multiple files OK</div>
+    </div>
+    <div class="input-card" style="cursor:default;border-style:solid">
+      <div class="input-icon">📷</div>
+      <div class="input-title">Use camera</div>
+      <div class="input-sub">Take a photo directly from your device</div>
+      <button class="camera-btn" onclick="openCamera()">Open camera</button>
+    </div>
+  </div>
+
+  <div class="pages-section" id="pages-section" style="display:none">
+    <div class="pages-header">
+      <span class="pages-title" id="pages-count">0 pages</span>
+      <button class="btn-outline" style="padding:0.4rem 0.875rem;border-radius:8px;font-size:0.78rem" onclick="clearAllPages()">Clear all</button>
+    </div>
+    <div class="pages-grid" id="pages-grid"></div>
+  </div>
+
+  <div class="settings" id="settings" style="display:none">
+    <div class="settings-title">Scan processing</div>
+    <div class="settings-grid">
+      <div class="setting-group">
+        <span class="setting-label">Scan style</span>
+        <div class="seg-btns">
+          <button class="seg-btn active" onclick="setSetting('style','clean',this)">Clean B&W</button>
+          <button class="seg-btn" onclick="setSetting('style','grayscale',this)">Grayscale</button>
+          <button class="seg-btn" onclick="setSetting('style','color',this)">Color</button>
+        </div>
+      </div>
+      <div class="setting-group">
+        <span class="setting-label">Page size</span>
+        <div class="seg-btns">
+          <button class="seg-btn active" onclick="setSetting('paper','a4',this)">A4</button>
+          <button class="seg-btn" onclick="setSetting('paper','letter',this)">Letter</button>
+          <button class="seg-btn" onclick="setSetting('paper','auto',this)">Auto</button>
+        </div>
+      </div>
+      <div class="setting-group">
+        <span class="setting-label">Contrast</span>
+        <div class="seg-btns">
+          <button class="seg-btn" onclick="setSetting('contrast','low',this)">Low</button>
+          <button class="seg-btn active" onclick="setSetting('contrast','medium',this)">Medium</button>
+          <button class="seg-btn" onclick="setSetting('contrast','high',this)">High</button>
+        </div>
+      </div>
+      <div class="setting-group">
+        <span class="setting-label">Margin</span>
+        <div class="seg-btns">
+          <button class="seg-btn" onclick="setSetting('margin','none',this)">None</button>
+          <button class="seg-btn active" onclick="setSetting('margin','small',this)">Small</button>
+          <button class="seg-btn" onclick="setSetting('margin','large',this)">Large</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="compare" id="compare">
+    <div class="compare-box">
+      <div class="compare-head">Original</div>
+      <img class="compare-img" id="compare-orig" src="" alt="Original">
+    </div>
+    <div class="compare-box">
+      <div class="compare-head">Processed (preview)</div>
+      <canvas id="compare-proc" class="compare-img" style="width:100%;max-height:280px"></canvas>
+    </div>
+  </div>
+
+  <div class="actions" id="actions" style="display:none">
+    <button class="btn-primary" id="gen-btn" onclick="generatePDF()">✦ Generate scanned PDF</button>
+    <button class="btn-outline" onclick="previewProcess()">Preview processing</button>
+    <div class="progress-wrap" id="progress-wrap">
+      <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
+      <div class="progress-label" id="prog-label">Processing...</div>
+    </div>
+  </div>
+
+  <div class="result-card" id="result-card">
+    <div style="font-size:2.5rem;margin-bottom:0.75rem">✅</div>
+    <div style="font-size:1.1rem;font-weight:700;margin-bottom:0.3rem" id="result-title">Scanned PDF ready</div>
+    <div style="font-size:0.85rem;color:var(--text2);margin-bottom:1.5rem" id="result-sub"></div>
+    <button class="btn-primary" onclick="downloadPDF()">↓ Download PDF</button>
+    <br><br>
+    <button class="btn-outline" onclick="resetAll()" style="margin-top:0.5rem">Scan more</button>
+  </div>
+</div>
+
+<!-- Camera Modal -->
+<div class="modal-bg" id="modal-bg">
+  <div class="modal">
+    <div class="modal-title">📷 Camera</div>
+    <video id="camera-video" autoplay playsinline muted></video>
+    <div class="modal-actions">
+      <button class="btn-primary" onclick="capturePhoto()">📸 Capture</button>
+      <button class="btn-outline" onclick="closeCamera()">Cancel</button>
+    </div>
+  </div>
+</div>
+<canvas id="off-canvas" style="display:none"></canvas>
+
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script>
+let pages = []; // {orig: HTMLImageElement, file: File}
+let settings = { style:'clean', paper:'a4', contrast:'medium', margin:'small' };
+let pdfBytes = null;
+let cameraStream = null;
+let dragSrc = null;
+
+const PAGE_SIZES = { a4:{w:595.28,h:841.89}, letter:{w:612,h:792} };
+const MARGINS = { none:0, small:28, large:56 };
+const CONTRAST = { low:1.2, medium:1.6, high:2.2 };
+
+function toast(msg){const t=document.createElement('div');Object.assign(t.style,{position:'fixed',bottom:'1.5rem',left:'50%',transform:'translateX(-50%)',background:'#1a1a2e',color:'white',padding:'0.75rem 1.5rem',borderRadius:'100px',fontSize:'0.875rem',fontWeight:'500',zIndex:'9999',boxShadow:'0 8px 32px rgba(100,100,160,0.25)'});t.textContent=msg;document.body.appendChild(t);setTimeout(()=>{t.style.opacity='0';t.style.transition='opacity 0.3s';setTimeout(()=>t.remove(),300);},2500);}
+function fmt(b){if(b<1024)return b+'B';if(b<1048576)return(b/1024).toFixed(1)+'KB';return(b/1048576).toFixed(2)+'MB';}
+
+function setSetting(key, val, btn) {
+  settings[key] = val;
+  btn.closest('.seg-btns').querySelectorAll('.seg-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function loadFiles(files) {
+  [...files].filter(f=>f.type.startsWith('image/')).forEach(file=>{
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => { pages.push({orig:img, file}); renderPages(); };
+    img.src = url;
+  });
+}
+
+function addImageFromBlob(blob) {
+  const url = URL.createObjectURL(blob);
+  const img = new Image();
+  img.onload = () => { pages.push({orig:img, file:new File([blob],'capture.jpg',{type:'image/jpeg'})}); renderPages(); };
+  img.src = url;
+}
+
+function renderPages() {
+  document.getElementById('pages-section').style.display = pages.length ? '' : 'none';
+  document.getElementById('settings').style.display = pages.length ? '' : 'none';
+  document.getElementById('actions').style.display = pages.length ? '' : 'none';
+  document.getElementById('pages-count').textContent = pages.length + ' page' + (pages.length!==1?'s':'');
+
+  const grid = document.getElementById('pages-grid');
+  grid.innerHTML = pages.map((p,i)=>`
+    <div class="page-card" draggable="true" data-idx="${i}"
+      ondragstart="onDS(event,${i})" ondragover="onDO(event,${i})"
+      ondrop="onDD(event,${i})" ondragend="onDE()">
+      <div class="page-thumb-wrap">
+        <img class="page-thumb" src="${p.orig.src}" alt="Page ${i+1}">
+      </div>
+      <div class="page-foot">
+        <span class="page-num">Page ${i+1}</span>
+        <button class="page-del" onclick="deletePage(${i})">✕</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function deletePage(i){pages.splice(i,1);renderPages();document.getElementById('result-card').style.display='none';}
+function clearAllPages(){pages=[];pdfBytes=null;renderPages();document.getElementById('compare').style.display='none';document.getElementById('result-card').style.display='none';}
+
+function onDS(e,i){dragSrc=i;setTimeout(()=>e.target.classList.add('dragging'),0);}
+function onDO(e,i){e.preventDefault();document.querySelectorAll('.page-card').forEach((c,j)=>c.classList.toggle('drag-target',j===i&&i!==dragSrc));}
+function onDD(e,i){e.preventDefault();if(dragSrc===null||dragSrc===i)return;const m=pages.splice(dragSrc,1)[0];pages.splice(i,0,m);renderPages();}
+function onDE(){dragSrc=null;document.querySelectorAll('.page-card').forEach(c=>c.classList.remove('dragging','drag-target'));}
+
+// ── SCAN PROCESSING ──────────────────────────────────────
+function processImage(img, canvas) {
+  const w = img.width, h = img.height;
+  canvas.width = w; canvas.height = h;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(img, 0, 0);
+
+  if(settings.style === 'color') return; // No processing for color
+
+  const imageData = ctx.getImageData(0, 0, w, h);
+  const data = imageData.data;
+  const contrast = CONTRAST[settings.contrast];
+
+  for(let i = 0; i < data.length; i += 4) {
+    // Grayscale
+    let gray = 0.299*data[i] + 0.587*data[i+1] + 0.114*data[i+2];
+
+    if(settings.style === 'clean') {
+      // Apply contrast curve to make text pop and background white
+      gray = ((gray/255 - 0.5) * contrast + 0.5) * 255;
+      gray = Math.max(0, Math.min(255, gray));
+      // Threshold for clean black/white look
+      gray = gray > 180 ? 255 : gray < 80 ? 0 : gray;
+    } else {
+      // Grayscale with contrast boost only
+      gray = ((gray/255 - 0.5) * contrast + 0.5) * 255;
+      gray = Math.max(0, Math.min(255, gray));
+    }
+
+    data[i] = data[i+1] = data[i+2] = gray;
+  }
+  ctx.putImageData(imageData, 0, 0);
+}
+
+function previewProcess() {
+  if(!pages.length) return;
+  const compare = document.getElementById('compare');
+  compare.style.display = 'grid';
+  document.getElementById('compare-orig').src = pages[0].orig.src;
+  const canvas = document.getElementById('compare-proc');
+  processImage(pages[0].orig, canvas);
+  compare.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+async function generatePDF() {
+  if(!pages.length) return;
+  const btn = document.getElementById('gen-btn');
+  btn.disabled=true; btn.textContent='Processing...';
+  const pw = document.getElementById('progress-wrap');
+  const pf = document.getElementById('prog-fill');
+  const pl = document.getElementById('prog-label');
+  pw.style.display='block';
+  document.getElementById('result-card').style.display='none';
+
+  try {
+    const pdf = await PDFLib.PDFDocument.create();
+    const offscreen = document.getElementById('off-canvas');
+
+    for(let i=0;i<pages.length;i++){
+      pf.style.width = Math.round((i/pages.length)*90)+'%';
+      pl.textContent = `Processing page ${i+1} of ${pages.length}...`;
+      await new Promise(r=>setTimeout(r,20));
+
+      const img = pages[i].orig;
+      processImage(img, offscreen);
+
+      let pageW, pageH;
+      if(settings.paper==='auto'){
+        pageW=img.width; pageH=img.height;
+      } else {
+        const dims = PAGE_SIZES[settings.paper];
+        // pick orientation based on image aspect
+        if(img.width>img.height){pageW=dims.h;pageH=dims.w;}
+        else{pageW=dims.w;pageH=dims.h;}
+      }
+
+      const margin = MARGINS[settings.margin];
+      const page = pdf.addPage([pageW, pageH]);
+
+      // White background
+      page.drawRectangle({x:0,y:0,width:pageW,height:pageH,color:PDFLib.rgb(1,1,1)});
+
+      // Get processed image
+      const dataUrl = offscreen.toDataURL('image/jpeg', 0.92);
+      const jpgBytes = await fetch(dataUrl).then(r=>r.arrayBuffer());
+      const jpgImg = await pdf.embedJpg(jpgBytes);
+
+      // Fit within margin
+      const usableW = pageW - margin*2;
+      const usableH = pageH - margin*2;
+      const scaleX = usableW/img.width, scaleY = usableH/img.height;
+      const scale = Math.min(scaleX, scaleY);
+      const iw = img.width*scale, ih = img.height*scale;
+      const x = margin + (usableW-iw)/2;
+      const y = margin + (usableH-ih)/2;
+
+      page.drawImage(jpgImg,{x,y,width:iw,height:ih});
+    }
+
+    pf.style.width='95%'; pl.textContent='Finalizing PDF...';
+    await new Promise(r=>setTimeout(r,50));
+    pdfBytes = await pdf.save();
+    pf.style.width='100%';
+
+    document.getElementById('result-title').textContent=`✓ ${pages.length}-page scanned PDF ready`;
+    document.getElementById('result-sub').textContent=`File size: ${fmt(pdfBytes.length)} · ${pages.length} page${pages.length!==1?'s':''}`;
+    document.getElementById('result-card').style.display='block';
+    document.getElementById('result-card').scrollIntoView({behavior:'smooth',block:'nearest'});
+  } catch(e){toast('Error: '+e.message);}
+
+  pw.style.display='none';
+  btn.disabled=false; btn.textContent='✦ Generate scanned PDF';
+}
+
+function downloadPDF(){
+  if(!pdfBytes)return;
+  const blob=new Blob([pdfBytes],{type:'application/pdf'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='neatkit-scanned.pdf';
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),5000);
+}
+
+function resetAll(){pages=[];pdfBytes=null;renderPages();document.getElementById('compare').style.display='none';document.getElementById('result-card').style.display='none';}
+
+// ── CAMERA ──────────────────────────────────────────────
+async function openCamera() {
+  try {
+    cameraStream = await navigator.mediaDevices.getUserMedia({
+      video:{facingMode:'environment',width:{ideal:1920},height:{ideal:1080}}
+    });
+    document.getElementById('camera-video').srcObject = cameraStream;
+    document.getElementById('modal-bg').style.display = 'flex';
+  } catch(e) {
+    toast('Camera not available: '+e.message);
+  }
+}
+
+function capturePhoto() {
+  const video = document.getElementById('camera-video');
+  const canvas = document.createElement('canvas');
+  canvas.width = video.videoWidth; canvas.height = video.videoHeight;
+  canvas.getContext('2d').drawImage(video,0,0);
+  canvas.toBlob(blob=>{ addImageFromBlob(blob); closeCamera(); },'image/jpeg',0.95);
+}
+
+function closeCamera() {
+  if(cameraStream){cameraStream.getTracks().forEach(t=>t.stop());cameraStream=null;}
+  document.getElementById('modal-bg').style.display='none';
+  document.getElementById('camera-video').srcObject=null;
+}
+</script>
+</body>
+</html>

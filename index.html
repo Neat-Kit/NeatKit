@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Neatkit — Free online tools that actually work. Compress images, convert files, format code, manipulate text. No signup, no limits, everything runs in your browser.">
+<meta name="keywords" content="free online tools, image compressor, pdf converter, unit converter, base64 encoder, json formatter, text tools, word counter">
+<meta property="og:title" content="Neatkit — Free Online Tools">
+<meta property="og:description" content="Free tools that actually work. Image compression, PDF tools, converters, text utilities. No signup required.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://neatkit.tools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://neatkit.tools">
+<title>Neatkit — Free Online Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Neatkit",
+  "url": "https://neatkit.tools",
+  "description": "Free online tools — image compression, PDF tools, unit converters, text utilities",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://neatkit.tools/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --grad-start: #b8c4e8;
+  --grad-mid:   #cfc0dd;
+  --grad-end:   #e8cdb0;
+  --grad: linear-gradient(135deg, var(--grad-start) 0%, var(--grad-mid) 50%, var(--grad-end) 100%);
+  --bg:   #ffffff;
+  --bg2:  #f7f7fb;
+  --bg3:  #f0f0f7;
+  --glass: rgba(255,255,255,0.75);
+  --text:  #1a1a2e;
+  --text2: #5a5a7a;
+  --text3: #9898b8;
+  --border: rgba(180,180,220,0.35);
+  --border2: rgba(180,180,220,0.6);
+  --accent: #7b8fd4;
+  --accent-light: rgba(123,143,212,0.1);
+  --shadow-sm: 0 1px 3px rgba(100,100,160,0.08);
+  --shadow-md: 0 4px 16px rgba(100,100,160,0.10);
+  --shadow-lg: 0 8px 32px rgba(100,100,160,0.14);
+  --sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 24px;
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--bg2); color: var(--text); font-family: var(--sans); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 200;
+  background: var(--glass);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid rgba(255,255,255,0.9);
+  padding: 0 2rem;
+  display: flex; align-items: center; height: 60px; gap: 1rem;
+}
+
+.logo {
+  display: flex; align-items: center; gap: 0.625rem;
+  text-decoration: none; font-weight: 700; font-size: 1.1rem;
+  color: var(--text); letter-spacing: -0.02em;
+}
+.logo-mark {
+  width: 30px; height: 30px;
+  background: var(--grad);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+  box-shadow: var(--shadow-sm);
+}
+.nav-links { margin-left: auto; display: flex; gap: 0.5rem; align-items: center; }
+.nav-link { color: var(--text2); font-size: 0.875rem; font-weight: 500; text-decoration: none; padding: 0.375rem 0.75rem; border-radius: var(--r-sm); transition: all 0.15s; }
+.nav-link:hover { color: var(--text); background: var(--bg3); }
+.nav-btn {
+  background: var(--grad); color: white; font-size: 0.82rem; font-weight: 600;
+  padding: 0.45rem 1rem; border-radius: 100px; border: none; cursor: pointer;
+  box-shadow: var(--shadow-sm); text-decoration: none; display: inline-flex; align-items: center;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.nav-btn:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+
+/* HERO */
+.hero {
+  background: var(--grad);
+  padding: 5rem 2rem 4.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1' fill='rgba(255,255,255,0.3)'/%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+.hero-inner { position: relative; max-width: 680px; margin: 0 auto; }
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.7);
+  color: rgba(50,50,100,0.8);
+  font-size: 0.78rem; font-weight: 600;
+  padding: 0.35rem 0.875rem;
+  border-radius: 100px;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.04em;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  color: white;
+  margin-bottom: 1.25rem;
+  text-shadow: 0 2px 16px rgba(100,100,160,0.2);
+}
+
+.hero-sub {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.85);
+  max-width: 480px;
+  margin: 0 auto 2.5rem;
+}
+
+/* SEARCH BAR */
+.search-wrap {
+  max-width: 540px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.search-bar {
+  width: 100%;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255,255,255,0.9);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 1rem;
+  padding: 1rem 3.5rem 1rem 3.25rem;
+  border-radius: 100px;
+  outline: none;
+  box-shadow: var(--shadow-lg);
+  transition: box-shadow 0.2s;
+}
+.search-bar:focus { box-shadow: 0 8px 40px rgba(100,100,160,0.22); }
+.search-bar::placeholder { color: var(--text3); }
+.search-icon { position: absolute; left: 1.125rem; top: 50%; transform: translateY(-50%); color: var(--text3); font-size: 1.1rem; pointer-events: none; }
+.search-shortcut { position: absolute; right: 1.125rem; top: 50%; transform: translateY(-50%); background: var(--bg3); color: var(--text3); font-size: 0.68rem; font-family: var(--mono); padding: 0.2rem 0.4rem; border-radius: 4px; border: 1px solid var(--border2); pointer-events: none; }
+
+/* CATEGORY PILLS */
+.cats {
+  display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;
+  max-width: 900px; margin: 2rem auto 0; padding: 0 1.5rem;
+}
+.cat-pill {
+  background: var(--bg); border: 1.5px solid var(--border);
+  color: var(--text2); font-size: 0.82rem; font-weight: 600;
+  padding: 0.45rem 1rem; border-radius: 100px;
+  cursor: pointer; transition: all 0.15s;
+}
+.cat-pill:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+.cat-pill.active { background: var(--grad); border-color: transparent; color: white; box-shadow: var(--shadow-sm); }
+
+/* GRID */
+.tools-section { max-width: 980px; margin: 2.5rem auto 0; padding: 0 1.5rem; }
+.section-label {
+  font-size: 0.72rem; font-weight: 700; color: var(--text3);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: flex; justify-content: space-between;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.tool-card {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 1.5rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  transition: all 0.2s;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+.tool-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--grad);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.tool-card:hover { border-color: rgba(123,143,212,0.4); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.tool-card:hover::before { opacity: 1; }
+
+.tool-icon-wrap {
+  width: 48px; height: 48px;
+  border-radius: var(--r-md);
+  background: var(--bg2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border);
+}
+
+.tool-name {
+  font-size: 1rem; font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.375rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.tool-arrow { color: var(--text3); font-size: 0.9rem; transition: transform 0.2s, color 0.2s; }
+.tool-card:hover .tool-arrow { transform: translate(2px,-2px); color: var(--accent); }
+
+.tool-desc { font-size: 0.84rem; color: var(--text2); line-height: 1.55; margin-bottom: 0.875rem; }
+
+/* STATS */
+.stats-section {
+  max-width: 980px; margin: 3rem auto; padding: 0 1.5rem;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+}
+.stat-card {
+  background: var(--bg); border: 1.5px solid var(--border); border-radius: var(--r-lg);
+  padding: 1.25rem 1.5rem; box-shadow: var(--shadow-sm); text-align: center;
+}
+.stat-num { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text); margin-bottom: 0.25rem; }
+.stat-num span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.stat-label { font-size: 0.78rem; color: var(--text3); font-weight: 500; }
+
+/* FAQ */
+.faq-section { max-width: 680px; margin: 0 auto 4rem; padding: 0 1.5rem; }
+.faq-title { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1.5rem; text-align: center; }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-q { padding: 1rem 0; font-weight: 600; font-size: 0.95rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.faq-q::after { content: '+'; color: var(--text3); font-size: 1.2rem; transition: transform 0.2s; }
+.faq-item.open .faq-q::after { transform: rotate(45deg); }
+.faq-a { font-size: 0.875rem; color: var(--text2); line-height: 1.7; padding-bottom: 1rem; display: none; }
+.faq-item.open .faq-a { display: block; }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border); background: var(--bg);
+  padding: 2.5rem 1.5rem; text-align: center;
+  color: var(--text3); font-size: 0.82rem;
+}
+footer a { color: var(--text3); text-decoration: none; margin: 0 0.75rem; }
+footer a:hover { color: var(--accent); }
+.footer-inner { max-width: 980px; margin: 0 auto; }
+.footer-links { display: flex; justify-content: center; gap: 0; flex-wrap: wrap; margin-top: 1rem; }
+
+/* NO RESULTS */
+.no-results { text-align: center; padding: 3rem; color: var(--text3); font-size: 0.9rem; display: none; }
+
+@media (max-width: 680px) {
+  nav { padding: 0 1rem; }
+  .hero { padding: 3.5rem 1.25rem 3rem; }
+  .cats { padding: 0 1rem; }
+  .tools-section { padding: 0 1rem; }
+  .tools-grid { grid-template-columns: 1fr; }
+  .stats-section { grid-template-columns: 1fr 1fr; padding: 0 1rem; }
+  .faq-section { padding: 0 1rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="/">
+    <div class="logo-mark">✦</div>
+    Neatkit
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="#tools">Tools</a>
+    <a class="nav-link" href="https://github.com/neatkit" target="_blank" rel="noopener">GitHub</a>
+    <a class="nav-btn" href="#tools">Browse all tools ↗</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">✦ Free · No signup · Runs in your browser</div>
+    <h1>Tools that<br>actually work.</h1>
+    <p class="hero-sub">Compress images, convert PDFs, format code, calculate anything. Fast, free, and private — your files never leave your device.</p>
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input class="search-bar" id="search" type="text" placeholder="Search tools..." autocomplete="off" aria-label="Search tools">
+      <span class="search-shortcut">↵</span>
+    </div>
+  </div>
+</section>
+
+<div class="cats" id="cats">
+  <button class="cat-pill active" data-cat="all">All tools</button>
+  <button class="cat-pill" data-cat="image">Image</button>
+  <button class="cat-pill" data-cat="pdf">PDF</button>
+  <button class="cat-pill" data-cat="text">Text</button>
+  <button class="cat-pill" data-cat="convert">Converters</button>
+  <button class="cat-pill" data-cat="dev">Developer</button>
+</div>
+
+<div class="tools-section" id="tools">
+  <div class="section-label">
+    <span>All tools — <span id="tool-count">0</span> available</span>
+    <span id="search-info" style="color:var(--accent);display:none"></span>
+  </div>
+
+  <div class="tools-grid" id="grid">
+
+    <a class="tool-card" href="tools/image-compress.html" data-cat="image" data-kw="image compress optimize reduce size jpg jpeg png webp quality photo">
+      <div class="tool-icon-wrap">🗜️</div>
+      <div class="tool-name">Image Compressor <span class="tool-arrow">↗</span></div>
+      <div class="tool-desc">Compress JPG, PNG, WebP images in your browser. Adjustable quality. Zero upload — completely private.</div>
+      <span style="display:inline-block;background:rgba(220,120,80,0.1);color:#b85a30;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">IMAGE</span>
+    </a>
+
+    <a class="tool-card" href="tools/image-resize.html" data-cat="image" data-kw="image resize dimensions width height scale crop thumbnail">
+      <div class="tool-icon-wrap">↔️</div>
+      <div class="tool-name">Image Resizer <span class="tool-arrow">↗</span></div>
+      <div class="tool-desc">Resize images to exact pixel dimensions or by percentage. Lock aspect ratio. Download instantly.</div>
+      <span style="display:inline-block;background:rgba(220,120,80,0.1);color:#b85a30;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">IMAGE</span>
+    </a>
+
+    <a class="tool-card" href="tools/pdf-merge.html" data-cat="pdf" data-kw="pdf merge combine join split pages browser wasm">
+      <div class="tool-icon-wrap">📄</div>
+      <div class="tool-name">PDF Merge & Split <span class="tool-arrow">↗</span></div>
+      <div class="tool-desc">Merge multiple PDFs into one, or split a PDF into individual pages. Powered by pdf-lib — runs entirely in browser.</div>
+      <span style="display:inline-block;background:rgba(200,80,80,0.1);color:#a03030;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">PDF</span>
+    </a>
+
+    <a class="tool-card" href="tools/word-counter.html" data-cat="text" data-kw="word count character letter paragraph sentence frequency reading time">
+      <div class="tool-icon-wrap">📝</div>
+      <div class="tool-name">Word Counter <span class="tool-arrow">↗</span></div>
+      <div class="tool-desc">Words, characters, sentences, paragraphs. Reading time, speaking time, lexical density, top word frequency.</div>
+      <span style="display:inline-block;background:rgba(123,143,212,0.12);color:#5a6fc0;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">TEXT</span>
+    </a>
+
+    <a class="tool-card" href="tools/case-converter.html" data-cat="text" data-kw="case upper lower title camel snake pascal kebab slug convert">
+      <div class="tool-icon-wrap">🔡</div>
+      <div class="tool-name">Case Converter <span class="tool-arrow">↗</span></div>
+      <div class="tool-desc">Convert to UPPERCASE, lowercase, Title Case, camelCase, snake_case, PascalCase, kebab-case and more.</div>
+      <span style="display:inline-block;background:rgba(123,143,212,0.12);color:#5a6fc0;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">TEXT</span>
+    </a>
+
+    <a class="tool-card" href="tools/unit-converter.html" data-cat="convert" data-kw="unit convert length weight mass temperature speed area volume data">
+      <div class="tool-icon-wrap">⚖️</div>
+      <div class="tool-name">Unit Converter <span class="tool-arrow">↗</span></div>
+      <div class="tool-desc">Length, weight, temperature, speed, area, volume, data size. 200+ unit combinations. Works offline.</div>
+      <span style="display:inline-block;background:rgba(196,168,130,0.18);color:#8a6840;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">CONVERT</span>
+    </a>
+
+    <a class="tool-card" href="tools/json-formatter.html" data-cat="dev" data-kw="json format pretty print validate minify parse tree view">
+      <div class="tool-icon-wrap">{ }</div>
+      <div class="tool-name">JSON Formatter <span class="tool-arrow">↗</span></div>
+      <div class="tool-desc">Pretty-print, minify, or validate JSON. Collapsible tree view. Convert to CSV. Syntax highlighted.</div>
+      <span style="display:inline-block;background:rgba(100,180,120,0.14);color:#3a7850;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">DEV</span>
+    </a>
+
+    <a class="tool-card" href="tools/base64.html" data-cat="dev" data-kw="base64 encode decode string binary file url safe">
+      <div class="tool-icon-wrap">🔐</div>
+      <div class="tool-name">Base64 Encoder <span class="tool-arrow">↗</span></div>
+      <div class="tool-desc">Encode/decode Base64 strings, URL-safe Base64, and file-to-Base64. Bidirectional, instant.</div>
+      <span style="display:inline-block;background:rgba(100,180,120,0.14);color:#3a7850;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">DEV</span>
+    </a>
+
+    <a class="tool-card" href="tools/color-converter.html" data-cat="dev" data-kw="color colour hex rgb hsl hsv cmyk rgba picker palette convert css">
+      <div class="tool-icon-wrap">🎨</div>
+      <div class="tool-name">Color Converter <span class="tool-arrow">↗</span></div>
+      <div class="tool-desc">Convert HEX ↔ RGB ↔ HSL ↔ HSV ↔ CMYK. Visual picker. Generate shade palettes. Copy CSS values.</div>
+      <span style="display:inline-block;background:rgba(100,180,120,0.14);color:#3a7850;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">DEV</span>
+    </a>
+
+    <a class="tool-card" href="tools/images-to-pdf.html" data-cat="pdf" data-kw="images to pdf jpg png convert pictures photo pdf make create">
+      <div class="tool-icon-wrap">🖼️</div>
+      <div class="tool-name">Images to PDF <span class="tool-arrow">↗</span></div>
+      <div class="tool-desc">Convert JPG, PNG, WebP images into a PDF. Drag to reorder pages. Choose A4, Letter or auto sizing.</div>
+      <span style="display:inline-block;background:rgba(200,80,80,0.1);color:#a03030;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">PDF</span>
+    </a>
+
+    <a class="tool-card" href="tools/id-card-to-pdf.html" data-cat="pdf" data-kw="id card scan pdf national id document front back copy kenya passport">
+      <div class="tool-icon-wrap">🪪</div>
+      <div class="tool-name">ID Card to PDF <span class="tool-arrow">↗</span></div>
+      <div class="tool-desc">Upload front and back of any ID card and get a neatly formatted PDF. Single or double sided. No app needed.</div>
+      <span style="display:inline-block;background:rgba(200,80,80,0.1);color:#a03030;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">PDF</span>
+    </a>
+
+    <a class="tool-card" href="tools/photo-to-pdf.html" data-cat="pdf" data-kw="scan photo pdf camera handwritten notes receipt document scanner mobile">
+      <div class="tool-icon-wrap">📷</div>
+      <div class="tool-name">Photo to Scanned PDF <span class="tool-arrow">↗</span></div>
+      <div class="tool-desc">Take a photo of handwritten notes, receipts or documents and convert to a clean scanned-looking PDF. Use camera or upload.</div>
+      <span style="display:inline-block;background:rgba(200,80,80,0.1);color:#a03030;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">PDF</span>
+    </a>
+
+  </div>
+  <div class="no-results" id="no-results">
+    No tools found for "<span id="no-results-q"></span>"
+    — <a href="#" onclick="clearSearch();return false" style="color:var(--accent)">clear search</a>
+  </div>
+</div>
+
+<div class="stats-section">
+  <div class="stat-card"><div class="stat-num"><span>12</span></div><div class="stat-label">Free tools, growing</div></div>
+  <div class="stat-card"><div class="stat-num"><span>0</span></div><div class="stat-label">Server uploads ever</div></div>
+  <div class="stat-card"><div class="stat-num"><span>∞</span></div><div class="stat-label">Uses. No limits.</div></div>
+  <div class="stat-card"><div class="stat-num"><span>0</span></div><div class="stat-label">Accounts required</div></div>
+</div>
+
+<div class="faq-section">
+  <div class="faq-title">Common questions</div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Are these tools really free?</div>
+    <div class="faq-a">Yes — completely free, forever. No hidden plans, no file size limits, no daily quotas. We keep the lights on with non-intrusive display ads.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Do my files get uploaded to a server?</div>
+    <div class="faq-a">No. Every tool on Neatkit runs entirely in your browser using JavaScript and WebAssembly. Your images, PDFs, and text never leave your device. This is better for your privacy and makes the tools faster too.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">How does browser-side PDF merging work?</div>
+    <div class="faq-a">We use pdf-lib, a pure JavaScript library that can read and write PDF files entirely within the browser. It's the same approach used by major productivity apps. Quality is identical to server-side processing for most documents.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Can I use these tools offline?</div>
+    <div class="faq-a">Once a tool page has loaded, most tools will continue to work without an internet connection. We're adding full PWA (offline) support progressively.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Is Neatkit open source?</div>
+    <div class="faq-a">Yes. The full source code is available on GitHub under the MIT license. Contributions, bug reports, and feature requests are welcome.</div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>Built with care — everything runs in your browser.</div>
+    <div class="footer-links">
+      <a href="/privacy">Privacy</a>
+      <a href="https://github.com/neatkit" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="/sitemap.xml">Sitemap</a>
+    </div>
+    <div style="margin-top:1rem;opacity:0.6">© 2025 Neatkit</div>
+  </div>
+</footer>
+
+<script>
+  const cards = [...document.querySelectorAll('.tool-card')];
+  const grid = document.getElementById('grid');
+  const noResults = document.getElementById('no-results');
+  const countEl = document.getElementById('tool-count');
+  const searchInfo = document.getElementById('search-info');
+
+  function updateCount() {
+    countEl.textContent = cards.filter(c => c.style.display !== 'none').length;
+  }
+  updateCount();
+
+  // Category filter
+  document.getElementById('cats').addEventListener('click', e => {
+    const pill = e.target.closest('.cat-pill');
+    if (!pill) return;
+    document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    const cat = pill.dataset.cat;
+    document.getElementById('search').value = '';
+    searchInfo.style.display = 'none';
+    cards.forEach(c => { c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none'; });
+    noResults.style.display = 'none';
+    grid.style.display = '';
+    updateCount();
+  });
+
+  // Search
+  const searchFn = () => {
+    const q = document.getElementById('search').value.toLowerCase().trim();
+    if (!q) { clearSearch(); return; }
+    document.querySelectorAll('.cat-pill').forEach(p => { p.classList.remove('active'); if(p.dataset.cat==='all') p.classList.add('active'); });
+    let found = 0;
+    cards.forEach(c => {
+      const hay = (c.dataset.kw + ' ' + c.querySelector('.tool-name').textContent).toLowerCase();
+      const match = q.split(' ').every(w => hay.includes(w));
+      c.style.display = match ? '' : 'none';
+      if (match) found++;
+    });
+    countEl.textContent = found;
+    searchInfo.textContent = `Showing results for "${q}"`;
+    searchInfo.style.display = found ? 'block' : 'none';
+    noResults.querySelector('#no-results-q').textContent = q;
+    noResults.style.display = found ? 'none' : 'block';
+    grid.style.display = found ? '' : 'none';
+  };
+
+  document.getElementById('search').addEventListener('input', searchFn);
+  document.getElementById('search').addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      const first = cards.find(c => c.style.display !== 'none');
+      if (first) window.location.href = first.href;
+    }
+  });
+
+  function clearSearch() {
+    document.getElementById('search').value = '';
+    cards.forEach(c => c.style.display = '');
+    grid.style.display = '';
+    noResults.style.display = 'none';
+    searchInfo.style.display = 'none';
+    updateCount();
+  }
+
+  // FAQ
+  function toggleFaq(el) {
+    const item = el.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Keyboard shortcut: / to focus search
+  document.addEventListener('keydown', e => {
+    if (e.key === '/' && document.activeElement !== document.getElementById('search')) {
+      e.preventDefault();
+      document.getElementById('search').focus();
+    }
+  });
+</script>
+</body>
+</html>

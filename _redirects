@@ -1,0 +1,15 @@
+# Cloudflare Pages — _redirects
+# Clean URLs (no .html extension in browser)
+/tools/image-compress     /tools/image-compress.html  200
+/tools/image-resize       /tools/image-resize.html    200
+/tools/pdf-merge          /tools/pdf-merge.html       200
+/tools/word-counter       /tools/word-counter.html    200
+/tools/case-converter     /tools/case-converter.html  200
+/tools/unit-converter     /tools/unit-converter.html  200
+/tools/json-formatter     /tools/json-formatter.html  200
+/tools/base64             /tools/base64.html          200
+/tools/color-converter    /tools/color-converter.html 200
+/tools/timezone           /tools/timezone.html        200
+
+# 404 fallback
+/*                        /index.html                 200
