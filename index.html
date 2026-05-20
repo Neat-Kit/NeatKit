@@ -3,564 +3,351 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Neatkit — Free online tools that actually work. Compress images, convert files, format code, manipulate text. No signup, no limits, everything runs in your browser.">
-<meta name="keywords" content="free online tools, image compressor, pdf converter, unit converter, base64 encoder, json formatter, text tools, word counter">
+<meta name="description" content="Neatkit — Free online tools that actually work. Compress images, convert PDFs, format code, manipulate text. No signup, no limits, everything runs in your browser.">
+<meta name="keywords" content="free online tools, image compressor, pdf converter, unit converter, base64 encoder, json formatter, text tools, word counter, ai detector, apa citation generator">
 <meta property="og:title" content="Neatkit — Free Online Tools">
 <meta property="og:description" content="Free tools that actually work. Image compression, PDF tools, converters, text utilities. No signup required.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://neatkit.tools">
+<meta property="og:url" content="https://neatkit.com">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://neatkit.tools">
-<title>Neatkit — Free Online Tools</title>
+<link rel="canonical" href="https://neatkit.com">
+<title>Neatkit — Free Online Tools. No Signup. No Limits.</title>
+
+<!-- Google AdSense — replace publisher ID after approval -->
+<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Neatkit",
-  "url": "https://neatkit.tools",
-  "description": "Free online tools — image compression, PDF tools, unit converters, text utilities",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://neatkit.tools/?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
-}
+{"@context":"https://schema.org","@type":"WebSite","name":"Neatkit","url":"https://neatkit.com","description":"Free online tools — image compression, PDF tools, unit converters, text utilities. No signup required.","potentialAction":{"@type":"SearchAction","target":"https://neatkit.com/?q={search_term_string}","query-input":"required name=search_term_string"}}
 </script>
 
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --grad-start: #b8c4e8;
-  --grad-mid:   #cfc0dd;
-  --grad-end:   #e8cdb0;
-  --grad: linear-gradient(135deg, var(--grad-start) 0%, var(--grad-mid) 50%, var(--grad-end) 100%);
-  --bg:   #ffffff;
-  --bg2:  #f7f7fb;
-  --bg3:  #f0f0f7;
-  --glass: rgba(255,255,255,0.75);
-  --text:  #1a1a2e;
-  --text2: #5a5a7a;
-  --text3: #9898b8;
-  --border: rgba(180,180,220,0.35);
-  --border2: rgba(180,180,220,0.6);
-  --accent: #7b8fd4;
-  --accent-light: rgba(123,143,212,0.1);
-  --shadow-sm: 0 1px 3px rgba(100,100,160,0.08);
-  --shadow-md: 0 4px 16px rgba(100,100,160,0.10);
-  --shadow-lg: 0 8px 32px rgba(100,100,160,0.14);
-  --sans: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --mono: 'JetBrains Mono', monospace;
-  --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 24px;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --lavender:#b8c4e8;--mauve:#cfc0dd;--peach:#e8cdb0;
+  --grad:linear-gradient(135deg,var(--lavender),var(--mauve),var(--peach));
+  --ink:#0f0f12;--ink2:#1c1c22;--mist:#f4f4f8;--mist2:#ecedf4;--white:#ffffff;
+  --tx1:#0f0f12;--tx2:#54546a;--tx3:#9898b2;
+  --rule:rgba(180,180,210,0.25);--rule2:rgba(180,180,210,0.45);
+  --display:'DM Serif Display',Georgia,serif;
+  --body:'Outfit',system-ui,sans-serif;
+  --code:'DM Mono',monospace;
+  --ease:cubic-bezier(0.16,1,0.3,1);
 }
+html{scroll-behavior:smooth}
+body{background:var(--white);color:var(--tx1);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
-html { scroll-behavior: smooth; }
-body { background: var(--bg2); color: var(--text); font-family: var(--sans); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+/* noise overlay */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:0.35}
 
 /* NAV */
-nav {
-  position: sticky; top: 0; z-index: 200;
-  background: var(--glass);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border-bottom: 1px solid rgba(255,255,255,0.9);
-  padding: 0 2rem;
-  display: flex; align-items: center; height: 60px; gap: 1rem;
-}
-
-.logo {
-  display: flex; align-items: center; gap: 0.625rem;
-  text-decoration: none; font-weight: 700; font-size: 1.1rem;
-  color: var(--text); letter-spacing: -0.02em;
-}
-.logo-mark {
-  width: 30px; height: 30px;
-  background: var(--grad);
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 15px;
-  box-shadow: var(--shadow-sm);
-}
-.nav-links { margin-left: auto; display: flex; gap: 0.5rem; align-items: center; }
-.nav-link { color: var(--text2); font-size: 0.875rem; font-weight: 500; text-decoration: none; padding: 0.375rem 0.75rem; border-radius: var(--r-sm); transition: all 0.15s; }
-.nav-link:hover { color: var(--text); background: var(--bg3); }
-.nav-btn {
-  background: var(--grad); color: white; font-size: 0.82rem; font-weight: 600;
-  padding: 0.45rem 1rem; border-radius: 100px; border: none; cursor: pointer;
-  box-shadow: var(--shadow-sm); text-decoration: none; display: inline-flex; align-items: center;
-  transition: box-shadow 0.15s, transform 0.15s;
-}
-.nav-btn:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.9);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--rule);height:56px;display:flex;align-items:center;padding:0 2rem}
+.nav-inner{width:100%;max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:1.25rem}
+.logo{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0}
+.logo-mark{width:26px;height:26px;background:var(--grad);border-radius:6px;position:relative;overflow:hidden}
+.logo-mark::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.35) 0%,transparent 55%)}
+.logo-text{font-family:var(--display);font-size:1.2rem;color:var(--tx1);letter-spacing:-0.01em;line-height:1}
+.logo-text em{font-style:italic;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-search{flex:1;max-width:320px;margin:0 auto;position:relative}
+.nav-search input{width:100%;background:var(--mist);border:1px solid var(--rule2);color:var(--tx1);font-family:var(--body);font-size:0.82rem;padding:0.45rem 0.75rem 0.45rem 2rem;border-radius:100px;outline:none;transition:all 0.2s var(--ease)}
+.nav-search input:focus{background:var(--white);border-color:var(--mauve);box-shadow:0 0 0 3px rgba(207,192,221,0.2)}
+.nav-search input::placeholder{color:var(--tx3)}
+.nav-search-icon{position:absolute;left:0.625rem;top:50%;transform:translateY(-50%);color:var(--tx3);font-size:0.875rem;pointer-events:none}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:0.75rem}
+.nav-pill{background:var(--ink);color:var(--white);font-family:var(--body);font-size:0.78rem;font-weight:600;padding:0.4rem 0.875rem;border-radius:100px;border:none;cursor:pointer;text-decoration:none;letter-spacing:0.01em;transition:opacity 0.15s,transform 0.15s;display:inline-flex;align-items:center}
+.nav-pill:hover{opacity:0.8;transform:translateY(-1px)}
 
 /* HERO */
-.hero {
-  background: var(--grad);
-  padding: 5rem 2rem 4.5rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1' fill='rgba(255,255,255,0.3)'/%3E%3C/svg%3E");
-  opacity: 0.5;
-}
-.hero-inner { position: relative; max-width: 680px; margin: 0 auto; }
+.hero{padding:5rem 2rem 3.5rem;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.hero-kicker{font-family:var(--code);font-size:0.68rem;color:var(--tx3);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:1.25rem;display:flex;align-items:center;gap:0.625rem;animation:fade-up 0.6s var(--ease) both}
+.hero-kicker::before{content:'';display:inline-block;width:28px;height:1px;background:var(--grad)}
+h1{font-family:var(--display);font-size:clamp(2.75rem,4.5vw,4rem);line-height:1.07;letter-spacing:-0.025em;color:var(--tx1);margin-bottom:1.25rem;animation:fade-up 0.6s 0.07s var(--ease) both}
+h1 em{font-style:italic;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:1rem;color:var(--tx2);line-height:1.75;max-width:400px;margin-bottom:2rem;font-weight:300;animation:fade-up 0.6s 0.14s var(--ease) both}
+.hero-facts{display:flex;gap:2.5rem;flex-wrap:wrap;animation:fade-up 0.6s 0.21s var(--ease) both}
+.hero-fact-num{font-family:var(--display);font-size:1.875rem;line-height:1;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block}
+.hero-fact-label{font-family:var(--code);font-size:0.62rem;color:var(--tx3);letter-spacing:0.1em;text-transform:uppercase;margin-top:3px;display:block}
 
-.hero-tag {
-  display: inline-flex; align-items: center; gap: 0.4rem;
-  background: rgba(255,255,255,0.5);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.7);
-  color: rgba(50,50,100,0.8);
-  font-size: 0.78rem; font-weight: 600;
-  padding: 0.35rem 0.875rem;
-  border-radius: 100px;
-  margin-bottom: 1.5rem;
-  letter-spacing: 0.04em;
-}
+/* HERO CARDS */
+.hero-right{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;position:relative}
+.hero-right::before{content:'';position:absolute;inset:-40px;background:radial-gradient(ellipse at 65% 45%,rgba(207,192,221,0.22) 0%,transparent 65%);pointer-events:none}
+.hero-card{background:var(--white);border:1px solid var(--rule2);border-radius:14px;padding:1.125rem;text-decoration:none;display:block;transition:transform 0.25s var(--ease),box-shadow 0.25s var(--ease),border-color 0.2s;position:relative;overflow:hidden;animation:card-in 0.55s var(--ease) both}
+.hero-card:nth-child(1){animation-delay:0.05s}
+.hero-card:nth-child(2){animation-delay:0.12s;margin-top:1.5rem}
+.hero-card:nth-child(3){animation-delay:0.19s}
+.hero-card:nth-child(4){animation-delay:0.26s;margin-top:1.5rem}
+.hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--grad);opacity:0;transition:opacity 0.2s}
+.hero-card:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(180,180,210,0.22);border-color:rgba(207,192,221,0.7)}
+.hero-card:hover::before{opacity:1}
+.hero-card-icon{font-size:1.5rem;margin-bottom:0.625rem;display:block}
+.hero-card-name{font-size:0.82rem;font-weight:600;color:var(--tx1);margin-bottom:0.2rem}
+.hero-card-desc{font-size:0.72rem;color:var(--tx3);line-height:1.5;font-weight:400}
 
-h1 {
-  font-size: clamp(2rem, 5vw, 3.25rem);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 1.1;
-  color: white;
-  margin-bottom: 1.25rem;
-  text-shadow: 0 2px 16px rgba(100,100,160,0.2);
-}
+@keyframes fade-up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes card-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 
-.hero-sub {
-  font-size: 1.1rem;
-  color: rgba(255,255,255,0.85);
-  max-width: 480px;
-  margin: 0 auto 2.5rem;
-}
+/* AD SLOT */
+.ad-slot{max-width:1100px;margin:0 auto;padding:0 2rem 2rem}
+.ad-inner{background:var(--mist);border:1px dashed var(--rule2);border-radius:10px;min-height:90px;display:flex;align-items:center;justify-content:center;font-family:var(--code);font-size:0.62rem;color:var(--tx3);letter-spacing:0.1em;text-transform:uppercase}
 
-/* SEARCH BAR */
-.search-wrap {
-  max-width: 540px;
-  margin: 0 auto;
-  position: relative;
-}
+/* SECTION RULE */
+.section-rule{max-width:1100px;margin:0 auto;padding:0 2rem 1rem;display:flex;align-items:center;gap:1rem}
+.sr-label{font-family:var(--code);font-size:0.65rem;color:var(--tx3);letter-spacing:0.12em;text-transform:uppercase;white-space:nowrap}
+.sr-line{flex:1;height:1px;background:var(--rule)}
+.sr-count{font-family:var(--code);font-size:0.65rem;color:var(--tx3);white-space:nowrap}
 
-.search-bar {
-  width: 100%;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(12px);
-  border: 1.5px solid rgba(255,255,255,0.9);
-  color: var(--text);
-  font-family: var(--sans);
-  font-size: 1rem;
-  padding: 1rem 3.5rem 1rem 3.25rem;
-  border-radius: 100px;
-  outline: none;
-  box-shadow: var(--shadow-lg);
-  transition: box-shadow 0.2s;
-}
-.search-bar:focus { box-shadow: 0 8px 40px rgba(100,100,160,0.22); }
-.search-bar::placeholder { color: var(--text3); }
-.search-icon { position: absolute; left: 1.125rem; top: 50%; transform: translateY(-50%); color: var(--text3); font-size: 1.1rem; pointer-events: none; }
-.search-shortcut { position: absolute; right: 1.125rem; top: 50%; transform: translateY(-50%); background: var(--bg3); color: var(--text3); font-size: 0.68rem; font-family: var(--mono); padding: 0.2rem 0.4rem; border-radius: 4px; border: 1px solid var(--border2); pointer-events: none; }
-
-/* CATEGORY PILLS */
-.cats {
-  display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;
-  max-width: 900px; margin: 2rem auto 0; padding: 0 1.5rem;
-}
-.cat-pill {
-  background: var(--bg); border: 1.5px solid var(--border);
-  color: var(--text2); font-size: 0.82rem; font-weight: 600;
-  padding: 0.45rem 1rem; border-radius: 100px;
-  cursor: pointer; transition: all 0.15s;
-}
-.cat-pill:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
-.cat-pill.active { background: var(--grad); border-color: transparent; color: white; box-shadow: var(--shadow-sm); }
+/* CATS */
+.cats-wrap{max-width:1100px;margin:0 auto;padding:0 2rem 1rem;display:flex;gap:0.375rem;flex-wrap:wrap}
+.cat-btn{font-family:var(--code);font-size:0.65rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:0.35rem 0.875rem;border-radius:100px;border:1px solid var(--rule2);background:transparent;color:var(--tx3);cursor:pointer;transition:all 0.15s}
+.cat-btn:hover{color:var(--tx1);border-color:var(--tx3)}
+.cat-btn.active{background:var(--ink);border-color:var(--ink);color:var(--white)}
 
 /* GRID */
-.tools-section { max-width: 980px; margin: 2.5rem auto 0; padding: 0 1.5rem; }
-.section-label {
-  font-size: 0.72rem; font-weight: 700; color: var(--text3);
-  letter-spacing: 0.1em; text-transform: uppercase;
-  margin-bottom: 1rem;
-  display: flex; justify-content: space-between;
-}
-
-.tools-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
-}
-
-.tool-card {
-  background: var(--bg);
-  border: 1.5px solid var(--border);
-  border-radius: var(--r-xl);
-  padding: 1.5rem;
-  cursor: pointer;
-  text-decoration: none;
-  display: block;
-  transition: all 0.2s;
-  box-shadow: var(--shadow-sm);
-  position: relative;
-  overflow: hidden;
-}
-.tool-card::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: var(--grad);
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-.tool-card:hover { border-color: rgba(123,143,212,0.4); box-shadow: var(--shadow-md); transform: translateY(-2px); }
-.tool-card:hover::before { opacity: 1; }
-
-.tool-icon-wrap {
-  width: 48px; height: 48px;
-  border-radius: var(--r-md);
-  background: var(--bg2);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
-  border: 1px solid var(--border);
-}
-
-.tool-name {
-  font-size: 1rem; font-weight: 700;
-  color: var(--text);
-  margin-bottom: 0.375rem;
-  display: flex; align-items: center; justify-content: space-between;
-}
-.tool-arrow { color: var(--text3); font-size: 0.9rem; transition: transform 0.2s, color 0.2s; }
-.tool-card:hover .tool-arrow { transform: translate(2px,-2px); color: var(--accent); }
-
-.tool-desc { font-size: 0.84rem; color: var(--text2); line-height: 1.55; margin-bottom: 0.875rem; }
-
-/* STATS */
-.stats-section {
-  max-width: 980px; margin: 3rem auto; padding: 0 1.5rem;
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
-}
-.stat-card {
-  background: var(--bg); border: 1.5px solid var(--border); border-radius: var(--r-lg);
-  padding: 1.25rem 1.5rem; box-shadow: var(--shadow-sm); text-align: center;
-}
-.stat-num { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text); margin-bottom: 0.25rem; }
-.stat-num span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.stat-label { font-size: 0.78rem; color: var(--text3); font-weight: 500; }
+.tools-wrap{max-width:1100px;margin:0 auto;padding:0 2rem}
+.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--rule2);border-radius:16px;overflow:hidden;background:var(--rule2);gap:1px}
+.tool-card{background:var(--white);padding:1.375rem 1.5rem;text-decoration:none;display:block;transition:background 0.15s;position:relative;overflow:hidden}
+.tool-card:hover{background:var(--mist)}
+.tool-card::after{content:'↗';position:absolute;top:1.25rem;right:1.25rem;font-size:0.82rem;color:var(--tx3);opacity:0;transform:translate(-4px,4px);transition:opacity 0.15s,transform 0.2s var(--ease)}
+.tool-card:hover::after{opacity:1;transform:translate(0,0)}
+.tool-cat-tag{font-family:var(--code);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--tx3);margin-bottom:0.625rem;display:block}
+.tool-name{font-size:0.975rem;font-weight:600;color:var(--tx1);margin-bottom:0.35rem;line-height:1.3}
+.tool-desc{font-size:0.78rem;color:var(--tx2);line-height:1.55;font-weight:300}
+.no-results{display:none;text-align:center;padding:3rem;color:var(--tx3);font-family:var(--code);font-size:0.72rem;letter-spacing:0.06em;grid-column:1/-1}
 
 /* FAQ */
-.faq-section { max-width: 680px; margin: 0 auto 4rem; padding: 0 1.5rem; }
-.faq-title { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1.5rem; text-align: center; }
-.faq-item { border-bottom: 1px solid var(--border); }
-.faq-q { padding: 1rem 0; font-weight: 600; font-size: 0.95rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-.faq-q::after { content: '+'; color: var(--text3); font-size: 1.2rem; transition: transform 0.2s; }
-.faq-item.open .faq-q::after { transform: rotate(45deg); }
-.faq-a { font-size: 0.875rem; color: var(--text2); line-height: 1.7; padding-bottom: 1rem; display: none; }
-.faq-item.open .faq-a { display: block; }
+.faq-wrap{max-width:680px;margin:5rem auto;padding:0 2rem}
+.faq-heading{font-family:var(--display);font-size:1.75rem;letter-spacing:-0.02em;margin-bottom:1.75rem;color:var(--tx1)}
+.faq-item{border-bottom:1px solid var(--rule)}
+.faq-q{padding:1rem 0;font-size:0.9rem;font-weight:500;color:var(--tx1);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;transition:color 0.15s;user-select:none}
+.faq-q:hover{color:var(--tx2)}
+.faq-icon{width:20px;height:20px;border:1px solid var(--rule2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:var(--tx3);flex-shrink:0;transition:all 0.2s var(--ease)}
+.faq-item.open .faq-icon{background:var(--ink);border-color:var(--ink);color:var(--white);transform:rotate(45deg)}
+.faq-a{font-size:0.875rem;color:var(--tx2);line-height:1.75;padding-bottom:1rem;display:none;font-weight:300}
+.faq-item.open .faq-a{display:block}
 
 /* FOOTER */
-footer {
-  border-top: 1px solid var(--border); background: var(--bg);
-  padding: 2.5rem 1.5rem; text-align: center;
-  color: var(--text3); font-size: 0.82rem;
+footer{border-top:1px solid var(--rule);padding:1.5rem 2rem}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:var(--display);font-size:1rem;color:var(--tx2);text-decoration:none;font-style:italic}
+.footer-links{display:flex;gap:1.5rem}
+.footer-link{font-family:var(--code);font-size:0.65rem;color:var(--tx3);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.15s}
+.footer-link:hover{color:var(--tx1)}
+.footer-copy{font-family:var(--code);font-size:0.62rem;color:var(--tx3);letter-spacing:0.06em}
+
+/* STICKY AD */
+#sticky-ad{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-top:1px solid var(--rule2);padding:0.625rem 2rem;display:none;align-items:center;justify-content:center}
+#sticky-ad-close{position:absolute;right:1rem;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--tx3);cursor:pointer;font-size:0.875rem;line-height:1;padding:0.25rem;transition:color 0.15s}
+#sticky-ad-close:hover{color:var(--tx1)}
+.sticky-ad-inner{font-family:var(--code);font-size:0.62rem;color:var(--tx3);letter-spacing:0.1em;text-transform:uppercase;min-height:50px;display:flex;align-items:center;justify-content:center;width:100%}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;gap:3rem;padding-top:3rem}
+  .hero-right{grid-template-columns:repeat(4,1fr)}
+  .hero-card:nth-child(2),.hero-card:nth-child(4){margin-top:0}
+  .tools-grid{grid-template-columns:1fr 1fr}
 }
-footer a { color: var(--text3); text-decoration: none; margin: 0 0.75rem; }
-footer a:hover { color: var(--accent); }
-.footer-inner { max-width: 980px; margin: 0 auto; }
-.footer-links { display: flex; justify-content: center; gap: 0; flex-wrap: wrap; margin-top: 1rem; }
-
-/* NO RESULTS */
-.no-results { text-align: center; padding: 3rem; color: var(--text3); font-size: 0.9rem; display: none; }
-
-@media (max-width: 680px) {
-  nav { padding: 0 1rem; }
-  .hero { padding: 3.5rem 1.25rem 3rem; }
-  .cats { padding: 0 1rem; }
-  .tools-section { padding: 0 1rem; }
-  .tools-grid { grid-template-columns: 1fr; }
-  .stats-section { grid-template-columns: 1fr 1fr; padding: 0 1rem; }
-  .faq-section { padding: 0 1rem; }
+@media(max-width:600px){
+  nav{padding:0 1rem}
+  .nav-search{display:none}
+  .hero{padding:2.5rem 1rem}
+  .hero-right{grid-template-columns:1fr 1fr}
+  .hero-card:nth-child(2),.hero-card:nth-child(4){margin-top:0.75rem}
+  .tools-wrap,.cats-wrap,.section-rule,.ad-slot,.faq-wrap{padding-left:1rem;padding-right:1rem}
+  .tools-grid{grid-template-columns:1fr;border-radius:12px}
+  footer{padding:1.25rem 1rem}
+  .footer-inner{flex-direction:column;align-items:flex-start;gap:0.75rem}
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <a class="logo" href="/">
-    <div class="logo-mark">✦</div>
-    Neatkit
-  </a>
-  <div class="nav-links">
-    <a class="nav-link" href="#tools">Tools</a>
-    <a class="nav-link" href="https://github.com/neatkit" target="_blank" rel="noopener">GitHub</a>
-    <a class="nav-btn" href="#tools">Browse all tools ↗</a>
+  <div class="nav-inner">
+    <a class="logo" href="/"><div class="logo-mark"></div><span class="logo-text">Neat<em>kit</em></span></a>
+    <div class="nav-search">
+      <span class="nav-search-icon">⌕</span>
+      <input type="text" id="search" placeholder="Search tools..." autocomplete="off" aria-label="Search tools">
+    </div>
+    <div class="nav-right">
+      <a class="nav-pill" href="#tools">All tools</a>
+    </div>
   </div>
 </nav>
 
 <section class="hero">
-  <div class="hero-inner">
-    <div class="hero-tag">✦ Free · No signup · Runs in your browser</div>
-    <h1>Tools that<br>actually work.</h1>
-    <p class="hero-sub">Compress images, convert PDFs, format code, calculate anything. Fast, free, and private — your files never leave your device.</p>
-    <div class="search-wrap">
-      <span class="search-icon">⌕</span>
-      <input class="search-bar" id="search" type="text" placeholder="Search tools..." autocomplete="off" aria-label="Search tools">
-      <span class="search-shortcut">↵</span>
+  <div class="hero-left">
+    <div class="hero-kicker">Free · No signup · No server uploads</div>
+    <h1>Tools that<br><em>actually work.</em></h1>
+    <p class="hero-sub">Compress images, merge PDFs, detect AI text, format citations. Everything runs in your browser — your files never leave your device.</p>
+    <div class="hero-facts">
+      <div class="hero-fact"><span class="hero-fact-num" id="fact-tools">14</span><span class="hero-fact-label">Free tools</span></div>
+      <div class="hero-fact"><span class="hero-fact-num">0</span><span class="hero-fact-label">Server uploads</span></div>
+      <div class="hero-fact"><span class="hero-fact-num">∞</span><span class="hero-fact-label">Uses, no limits</span></div>
     </div>
+  </div>
+  <div class="hero-right">
+    <a class="hero-card" href="tools/image-compress.html"><span class="hero-card-icon">🗜️</span><div class="hero-card-name">Image Compressor</div><div class="hero-card-desc">Reduce JPG, PNG, WebP size in browser</div></a>
+    <a class="hero-card" href="tools/pdf-merge.html"><span class="hero-card-icon">📑</span><div class="hero-card-name">PDF Merge & Split</div><div class="hero-card-desc">Combine or split PDFs, drag to reorder</div></a>
+    <a class="hero-card" href="tools/ai-detector.html"><span class="hero-card-icon">🔍</span><div class="hero-card-name">AI Text Detector</div><div class="hero-card-desc">Sentence-level analysis, upload files</div></a>
+    <a class="hero-card" href="tools/apa-formatter.html"><span class="hero-card-icon">📐</span><div class="hero-card-name">APA Formatter</div><div class="hero-card-desc">7th edition citations + document format</div></a>
   </div>
 </section>
 
-<div class="cats" id="cats">
-  <button class="cat-pill active" data-cat="all">All tools</button>
-  <button class="cat-pill" data-cat="image">Image</button>
-  <button class="cat-pill" data-cat="pdf">PDF</button>
-  <button class="cat-pill" data-cat="text">Text</button>
-  <button class="cat-pill" data-cat="convert">Converters</button>
-  <button class="cat-pill" data-cat="dev">Developer</button>
+<div class="ad-slot"><div class="ad-inner" aria-label="Advertisement">Advertisement</div></div>
+
+<div class="section-rule"><span class="sr-label">All tools</span><div class="sr-line"></div><span class="sr-count" id="tool-count">14 available</span></div>
+
+<div class="cats-wrap" id="cats">
+  <button class="cat-btn active" data-cat="all">All</button>
+  <button class="cat-btn" data-cat="image">Image</button>
+  <button class="cat-btn" data-cat="pdf">PDF</button>
+  <button class="cat-btn" data-cat="text">Text</button>
+  <button class="cat-btn" data-cat="convert">Converters</button>
+  <button class="cat-btn" data-cat="dev">Developer</button>
 </div>
 
-<div class="tools-section" id="tools">
-  <div class="section-label">
-    <span>All tools — <span id="tool-count">0</span> available</span>
-    <span id="search-info" style="color:var(--accent);display:none"></span>
-  </div>
-
+<div class="tools-wrap" id="tools">
   <div class="tools-grid" id="grid">
 
     <a class="tool-card" href="tools/image-compress.html" data-cat="image" data-kw="image compress optimize reduce size jpg jpeg png webp quality photo">
-      <div class="tool-icon-wrap">🗜️</div>
-      <div class="tool-name">Image Compressor <span class="tool-arrow">↗</span></div>
-      <div class="tool-desc">Compress JPG, PNG, WebP images in your browser. Adjustable quality. Zero upload — completely private.</div>
-      <span style="display:inline-block;background:rgba(220,120,80,0.1);color:#b85a30;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">IMAGE</span>
+      <span class="tool-cat-tag">Image</span><div class="tool-name">Image Compressor</div>
+      <div class="tool-desc">Reduce JPG, PNG, WebP file size with adjustable quality. Zero upload — completely private.</div>
     </a>
 
-    <a class="tool-card" href="tools/image-resize.html" data-cat="image" data-kw="image resize dimensions width height scale crop thumbnail">
-      <div class="tool-icon-wrap">↔️</div>
-      <div class="tool-name">Image Resizer <span class="tool-arrow">↗</span></div>
-      <div class="tool-desc">Resize images to exact pixel dimensions or by percentage. Lock aspect ratio. Download instantly.</div>
-      <span style="display:inline-block;background:rgba(220,120,80,0.1);color:#b85a30;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">IMAGE</span>
+    <a class="tool-card" href="tools/image-resize.html" data-cat="image" data-kw="image resize dimensions width height scale thumbnail avatar">
+      <span class="tool-cat-tag">Image</span><div class="tool-name">Image Resizer</div>
+      <div class="tool-desc">Resize to exact pixel dimensions or percentage. Aspect ratio lock. Social media presets.</div>
     </a>
 
-    <a class="tool-card" href="tools/pdf-merge.html" data-cat="pdf" data-kw="pdf merge combine join split pages browser wasm">
-      <div class="tool-icon-wrap">📄</div>
-      <div class="tool-name">PDF Merge & Split <span class="tool-arrow">↗</span></div>
-      <div class="tool-desc">Merge multiple PDFs into one, or split a PDF into individual pages. Powered by pdf-lib — runs entirely in browser.</div>
-      <span style="display:inline-block;background:rgba(200,80,80,0.1);color:#a03030;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">PDF</span>
+    <a class="tool-card" href="tools/pdf-merge.html" data-cat="pdf" data-kw="pdf merge combine join split pages browser free">
+      <span class="tool-cat-tag">PDF</span><div class="tool-name">PDF Merge & Split</div>
+      <div class="tool-desc">Merge multiple PDFs into one or split into pages. Drag to reorder. Powered by pdf-lib in browser.</div>
     </a>
 
-    <a class="tool-card" href="tools/word-counter.html" data-cat="text" data-kw="word count character letter paragraph sentence frequency reading time">
-      <div class="tool-icon-wrap">📝</div>
-      <div class="tool-name">Word Counter <span class="tool-arrow">↗</span></div>
-      <div class="tool-desc">Words, characters, sentences, paragraphs. Reading time, speaking time, lexical density, top word frequency.</div>
-      <span style="display:inline-block;background:rgba(123,143,212,0.12);color:#5a6fc0;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">TEXT</span>
+    <a class="tool-card" href="tools/images-to-pdf.html" data-cat="pdf" data-kw="images to pdf jpg png convert pictures photo make create">
+      <span class="tool-cat-tag">PDF</span><div class="tool-name">Images to PDF</div>
+      <div class="tool-desc">Convert JPG, PNG, WebP images to a PDF. Drag to reorder pages. A4, Letter or auto sizing.</div>
     </a>
 
-    <a class="tool-card" href="tools/case-converter.html" data-cat="text" data-kw="case upper lower title camel snake pascal kebab slug convert">
-      <div class="tool-icon-wrap">🔡</div>
-      <div class="tool-name">Case Converter <span class="tool-arrow">↗</span></div>
+    <a class="tool-card" href="tools/id-card-to-pdf.html" data-cat="pdf" data-kw="id card scan pdf national id document front back copy passport kenya">
+      <span class="tool-cat-tag">PDF</span><div class="tool-name">ID Card to PDF</div>
+      <div class="tool-desc">Upload front and back of any ID and get a neatly formatted PDF. Single or double sided. Free.</div>
+    </a>
+
+    <a class="tool-card" href="tools/photo-to-pdf.html" data-cat="pdf" data-kw="scan photo pdf camera handwritten notes receipt document scanner mobile phone">
+      <span class="tool-cat-tag">PDF</span><div class="tool-name">Photo to Scanned PDF</div>
+      <div class="tool-desc">Convert photos of documents or handwritten notes into clean scanned-looking PDFs. Camera or upload.</div>
+    </a>
+
+    <a class="tool-card" href="tools/word-counter.html" data-cat="text" data-kw="word count character letter paragraph sentence reading time frequency density">
+      <span class="tool-cat-tag">Text</span><div class="tool-name">Word Counter</div>
+      <div class="tool-desc">Words, characters, sentences, paragraphs. Reading time, speaking time, lexical density, top words.</div>
+    </a>
+
+    <a class="tool-card" href="tools/case-converter.html" data-cat="text" data-kw="case upper lower title camel snake pascal kebab slug text convert">
+      <span class="tool-cat-tag">Text</span><div class="tool-name">Case Converter</div>
       <div class="tool-desc">Convert to UPPERCASE, lowercase, Title Case, camelCase, snake_case, PascalCase, kebab-case and more.</div>
-      <span style="display:inline-block;background:rgba(123,143,212,0.12);color:#5a6fc0;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">TEXT</span>
     </a>
 
-    <a class="tool-card" href="tools/unit-converter.html" data-cat="convert" data-kw="unit convert length weight mass temperature speed area volume data">
-      <div class="tool-icon-wrap">⚖️</div>
-      <div class="tool-name">Unit Converter <span class="tool-arrow">↗</span></div>
-      <div class="tool-desc">Length, weight, temperature, speed, area, volume, data size. 200+ unit combinations. Works offline.</div>
-      <span style="display:inline-block;background:rgba(196,168,130,0.18);color:#8a6840;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">CONVERT</span>
-    </a>
-
-    <a class="tool-card" href="tools/json-formatter.html" data-cat="dev" data-kw="json format pretty print validate minify parse tree view">
-      <div class="tool-icon-wrap">{ }</div>
-      <div class="tool-name">JSON Formatter <span class="tool-arrow">↗</span></div>
-      <div class="tool-desc">Pretty-print, minify, or validate JSON. Collapsible tree view. Convert to CSV. Syntax highlighted.</div>
-      <span style="display:inline-block;background:rgba(100,180,120,0.14);color:#3a7850;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">DEV</span>
-    </a>
-
-    <a class="tool-card" href="tools/base64.html" data-cat="dev" data-kw="base64 encode decode string binary file url safe">
-      <div class="tool-icon-wrap">🔐</div>
-      <div class="tool-name">Base64 Encoder <span class="tool-arrow">↗</span></div>
-      <div class="tool-desc">Encode/decode Base64 strings, URL-safe Base64, and file-to-Base64. Bidirectional, instant.</div>
-      <span style="display:inline-block;background:rgba(100,180,120,0.14);color:#3a7850;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">DEV</span>
-    </a>
-
-    <a class="tool-card" href="tools/color-converter.html" data-cat="dev" data-kw="color colour hex rgb hsl hsv cmyk rgba picker palette convert css">
-      <div class="tool-icon-wrap">🎨</div>
-      <div class="tool-name">Color Converter <span class="tool-arrow">↗</span></div>
-      <div class="tool-desc">Convert HEX ↔ RGB ↔ HSL ↔ HSV ↔ CMYK. Visual picker. Generate shade palettes. Copy CSS values.</div>
-      <span style="display:inline-block;background:rgba(100,180,120,0.14);color:#3a7850;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">DEV</span>
-    </a>
-
-    <a class="tool-card" href="tools/images-to-pdf.html" data-cat="pdf" data-kw="images to pdf jpg png convert pictures photo pdf make create">
-      <div class="tool-icon-wrap">🖼️</div>
-      <div class="tool-name">Images to PDF <span class="tool-arrow">↗</span></div>
-      <div class="tool-desc">Convert JPG, PNG, WebP images into a PDF. Drag to reorder pages. Choose A4, Letter or auto sizing.</div>
-      <span style="display:inline-block;background:rgba(200,80,80,0.1);color:#a03030;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">PDF</span>
-    </a>
-
-    <a class="tool-card" href="tools/id-card-to-pdf.html" data-cat="pdf" data-kw="id card scan pdf national id document front back copy kenya passport">
-      <div class="tool-icon-wrap">🪪</div>
-      <div class="tool-name">ID Card to PDF <span class="tool-arrow">↗</span></div>
-      <div class="tool-desc">Upload front and back of any ID card and get a neatly formatted PDF. Single or double sided. No app needed.</div>
-      <span style="display:inline-block;background:rgba(200,80,80,0.1);color:#a03030;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">PDF</span>
-    </a>
-
-    <a class="tool-card" href="tools/photo-to-pdf.html" data-cat="pdf" data-kw="scan photo pdf camera handwritten notes receipt document scanner mobile">
-      <div class="tool-icon-wrap">📷</div>
-      <div class="tool-name">Photo to Scanned PDF <span class="tool-arrow">↗</span></div>
-      <div class="tool-desc">Take a photo of handwritten notes, receipts or documents and convert to a clean scanned-looking PDF. Use camera or upload.</div>
-      <span style="display:inline-block;background:rgba(200,80,80,0.1);color:#a03030;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">PDF</span>
-    </a>
-
-    <a class="tool-card" href="tools/ai-detector.html" data-cat="text" data-kw="ai detector check ai generated text turnitin plagiarism perplexity burstiness chatgpt detect">
-      <div class="tool-icon-wrap">🔍</div>
-      <div class="tool-name">AI Text Detector <span class="tool-arrow">↗</span></div>
-      <div class="tool-desc">Analyzes sentence uniformity, transition word overuse, lexical diversity and passive voice to flag AI-like patterns. Shows exactly which sentences are flagged and why.</div>
-      <span style="display:inline-block;background:rgba(123,143,212,0.12);color:#5a6fc0;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">TEXT</span>
+    <a class="tool-card" href="tools/ai-detector.html" data-cat="text" data-kw="ai detector check ai generated text turnitin plagiarism perplexity burstiness chatgpt detect writing">
+      <span class="tool-cat-tag">Text</span><div class="tool-name">AI Text Detector</div>
+      <div class="tool-desc">Sentence-level analysis of perplexity, burstiness and transition patterns. Upload PDF, DOCX, or paste text.</div>
     </a>
 
     <a class="tool-card" href="tools/apa-formatter.html" data-cat="text" data-kw="apa 7th edition citation reference format generator bibliography academic journal book website report thesis">
-      <div class="tool-icon-wrap">📐</div>
-      <div class="tool-name">APA 7th Edition Formatter <span class="tool-arrow">↗</span></div>
-      <div class="tool-desc">Generate correct APA 7th edition citations for journals, books, websites, reports, theses and more. Builds your full reference list with in-text examples.</div>
-      <span style="display:inline-block;background:rgba(123,143,212,0.12);color:#5a6fc0;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:100px;letter-spacing:0.04em">TEXT</span>
+      <span class="tool-cat-tag">Text</span><div class="tool-name">APA 7th Edition Formatter</div>
+      <div class="tool-desc">Generate APA citations for journals, books, websites, theses. Format whole documents. Build reference lists.</div>
     </a>
 
-  </div>
-  <div class="no-results" id="no-results">
-    No tools found for "<span id="no-results-q"></span>"
-    — <a href="#" onclick="clearSearch();return false" style="color:var(--accent)">clear search</a>
+    <a class="tool-card" href="tools/unit-converter.html" data-cat="convert" data-kw="unit convert length weight mass temperature speed area volume data km miles kg lbs celsius fahrenheit">
+      <span class="tool-cat-tag">Converter</span><div class="tool-name">Unit Converter</div>
+      <div class="tool-desc">Length, weight, temperature, speed, area, volume, data. 200+ unit combinations. Instant results.</div>
+    </a>
+
+    <a class="tool-card" href="tools/json-formatter.html" data-cat="dev" data-kw="json format pretty print validate minify parse tree view beautify">
+      <span class="tool-cat-tag">Developer</span><div class="tool-name">JSON Formatter</div>
+      <div class="tool-desc">Pretty-print, minify, validate JSON. Collapsible tree view. Syntax highlighted. Convert to CSV.</div>
+    </a>
+
+    <a class="tool-card" href="tools/base64.html" data-cat="dev" data-kw="base64 encode decode string binary file url safe converter online">
+      <span class="tool-cat-tag">Developer</span><div class="tool-name">Base64 Encoder</div>
+      <div class="tool-desc">Encode / decode Base64. URL-safe mode. File to Base64. Bidirectional, instant.</div>
+    </a>
+
+    <a class="tool-card" href="tools/color-converter.html" data-cat="dev" data-kw="color hex rgb hsl hsv cmyk rgba picker palette convert css online">
+      <span class="tool-cat-tag">Developer</span><div class="tool-name">Color Converter</div>
+      <div class="tool-desc">HEX ↔ RGB ↔ HSL ↔ HSV ↔ CMYK. Visual picker. Generate shade palettes. Copy CSS values.</div>
+    </a>
+
+    <div class="no-results" id="no-results">No tools match "<span id="no-results-q"></span>" — <a href="#" onclick="clearSearch();return false" style="color:var(--tx1);text-decoration:underline">clear search</a></div>
+
   </div>
 </div>
 
-<div class="stats-section">
-  <div class="stat-card"><div class="stat-num"><span>14</span></div><div class="stat-label">Free tools, growing</div></div>
-  <div class="stat-card"><div class="stat-num"><span>0</span></div><div class="stat-label">Server uploads ever</div></div>
-  <div class="stat-card"><div class="stat-num"><span>∞</span></div><div class="stat-label">Uses. No limits.</div></div>
-  <div class="stat-card"><div class="stat-num"><span>0</span></div><div class="stat-label">Accounts required</div></div>
-</div>
-
-<div class="faq-section">
-  <div class="faq-title">Common questions</div>
-
-  <div class="faq-item">
-    <div class="faq-q" onclick="toggleFaq(this)">Are these tools really free?</div>
-    <div class="faq-a">Yes — completely free, forever. No hidden plans, no file size limits, no daily quotas. We keep the lights on with non-intrusive display ads.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q" onclick="toggleFaq(this)">Do my files get uploaded to a server?</div>
-    <div class="faq-a">No. Every tool on Neatkit runs entirely in your browser using JavaScript and WebAssembly. Your images, PDFs, and text never leave your device. This is better for your privacy and makes the tools faster too.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q" onclick="toggleFaq(this)">How does browser-side PDF merging work?</div>
-    <div class="faq-a">We use pdf-lib, a pure JavaScript library that can read and write PDF files entirely within the browser. It's the same approach used by major productivity apps. Quality is identical to server-side processing for most documents.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q" onclick="toggleFaq(this)">Can I use these tools offline?</div>
-    <div class="faq-a">Once a tool page has loaded, most tools will continue to work without an internet connection. We're adding full PWA (offline) support progressively.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q" onclick="toggleFaq(this)">Is Neatkit open source?</div>
-    <div class="faq-a">Yes. The full source code is available on GitHub under the MIT license. Contributions, bug reports, and feature requests are welcome.</div>
-  </div>
+<div class="faq-wrap">
+  <div class="faq-heading">Common questions</div>
+  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Are these tools really free?<span class="faq-icon">+</span></div><div class="faq-a">Yes — completely free, forever. No hidden plans, no file size limits, no daily quotas. We keep the site running with non-intrusive display ads.</div></div>
+  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do my files get uploaded to a server?<span class="faq-icon">+</span></div><div class="faq-a">No. Every tool on Neatkit runs entirely in your browser using JavaScript and WebAssembly. Your images, PDFs, and text never leave your device. Processing happens on your own hardware — which also makes it faster.</div></div>
+  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How does browser-side PDF processing work?<span class="faq-icon">+</span></div><div class="faq-a">We use pdf-lib, a JavaScript library that reads and writes PDFs entirely within the browser. Files are loaded into your device's memory, processed, and downloaded — never sent anywhere. Quality is identical to server-side tools.</div></div>
+  <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Why do some tools load external scripts?<span class="faq-icon">+</span></div><div class="faq-a">Some tools load JavaScript libraries (like PDF.js or mammoth.js) from trusted CDNs on first use. These power the tool — they don't collect data. Once loaded they're cached, so repeat visits are instant.</div></div>
 </div>
 
 <footer>
   <div class="footer-inner">
-    <div>Built with care — everything runs in your browser.</div>
+    <a class="footer-logo" href="/">Neatkit</a>
     <div class="footer-links">
-      <a href="/privacy">Privacy</a>
-      <a href="https://github.com/neatkit" target="_blank" rel="noopener">GitHub ↗</a>
-      <a href="/sitemap.xml">Sitemap</a>
+      <a class="footer-link" href="/privacy.html">Privacy</a>
+      <a class="footer-link" href="mailto:hello@neatkit.com">Contact</a>
     </div>
-    <div style="margin-top:1rem;opacity:0.6">© 2025 Neatkit</div>
+    <span class="footer-copy">© 2025 Neatkit</span>
   </div>
 </footer>
 
+<div id="sticky-ad" role="complementary" aria-label="Advertisement">
+  <button id="sticky-ad-close" onclick="document.getElementById('sticky-ad').style.display='none'" aria-label="Close">✕</button>
+  <div class="sticky-ad-inner">Advertisement</div>
+</div>
+
 <script>
-  const cards = [...document.querySelectorAll('.tool-card')];
-  const grid = document.getElementById('grid');
-  const noResults = document.getElementById('no-results');
-  const countEl = document.getElementById('tool-count');
-  const searchInfo = document.getElementById('search-info');
+const cards=[...document.querySelectorAll('.tool-card[data-cat]')];
+const noResults=document.getElementById('no-results');
+const countEl=document.getElementById('tool-count');
 
-  function updateCount() {
-    countEl.textContent = cards.filter(c => c.style.display !== 'none').length;
-  }
+function updateCount(){const n=cards.filter(c=>c.style.display!=='none').length;countEl.textContent=n+' available';document.getElementById('fact-tools').textContent=cards.length;}
+updateCount();
+
+document.getElementById('search').addEventListener('input',function(){
+  const q=this.value.toLowerCase().trim();
+  if(!q){clearSearch();return;}
+  document.querySelectorAll('.cat-btn').forEach(b=>{b.classList.remove('active');if(b.dataset.cat==='all')b.classList.add('active');});
+  let found=0;
+  cards.forEach(c=>{const hay=(c.dataset.kw+' '+c.querySelector('.tool-name').textContent).toLowerCase();const match=q.split(' ').every(w=>hay.includes(w));c.style.display=match?'':'none';if(match)found++;});
+  noResults.style.display=found?'none':'block';
+  noResults.querySelector('#no-results-q').textContent=q;
   updateCount();
+});
 
-  // Category filter
-  document.getElementById('cats').addEventListener('click', e => {
-    const pill = e.target.closest('.cat-pill');
-    if (!pill) return;
-    document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
-    pill.classList.add('active');
-    const cat = pill.dataset.cat;
-    document.getElementById('search').value = '';
-    searchInfo.style.display = 'none';
-    cards.forEach(c => { c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none'; });
-    noResults.style.display = 'none';
-    grid.style.display = '';
-    updateCount();
-  });
+document.getElementById('search').addEventListener('keydown',e=>{if(e.key==='Enter'){const first=cards.find(c=>c.style.display!=='none');if(first)window.location.href=first.href;}});
+document.addEventListener('keydown',e=>{if(e.key==='/'&&document.activeElement.tagName!=='INPUT'){e.preventDefault();document.getElementById('search').focus();}});
 
-  // Search
-  const searchFn = () => {
-    const q = document.getElementById('search').value.toLowerCase().trim();
-    if (!q) { clearSearch(); return; }
-    document.querySelectorAll('.cat-pill').forEach(p => { p.classList.remove('active'); if(p.dataset.cat==='all') p.classList.add('active'); });
-    let found = 0;
-    cards.forEach(c => {
-      const hay = (c.dataset.kw + ' ' + c.querySelector('.tool-name').textContent).toLowerCase();
-      const match = q.split(' ').every(w => hay.includes(w));
-      c.style.display = match ? '' : 'none';
-      if (match) found++;
-    });
-    countEl.textContent = found;
-    searchInfo.textContent = `Showing results for "${q}"`;
-    searchInfo.style.display = found ? 'block' : 'none';
-    noResults.querySelector('#no-results-q').textContent = q;
-    noResults.style.display = found ? 'none' : 'block';
-    grid.style.display = found ? '' : 'none';
-  };
+function clearSearch(){document.getElementById('search').value='';cards.forEach(c=>c.style.display='');noResults.style.display='none';updateCount();}
 
-  document.getElementById('search').addEventListener('input', searchFn);
-  document.getElementById('search').addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-      const first = cards.find(c => c.style.display !== 'none');
-      if (first) window.location.href = first.href;
-    }
-  });
+document.getElementById('cats').addEventListener('click',e=>{
+  const btn=e.target.closest('.cat-btn');if(!btn)return;
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+  const cat=btn.dataset.cat;document.getElementById('search').value='';
+  cards.forEach(c=>{c.style.display=cat==='all'||c.dataset.cat===cat?'':'none';});
+  noResults.style.display='none';updateCount();
+});
 
-  function clearSearch() {
-    document.getElementById('search').value = '';
-    cards.forEach(c => c.style.display = '');
-    grid.style.display = '';
-    noResults.style.display = 'none';
-    searchInfo.style.display = 'none';
-    updateCount();
-  }
+function toggleFaq(el){const item=el.closest('.faq-item');const isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open');}
 
-  // FAQ
-  function toggleFaq(el) {
-    const item = el.closest('.faq-item');
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
-  }
-
-  // Keyboard shortcut: / to focus search
-  document.addEventListener('keydown', e => {
-    if (e.key === '/' && document.activeElement !== document.getElementById('search')) {
-      e.preventDefault();
-      document.getElementById('search').focus();
-    }
-  });
+setTimeout(()=>{document.getElementById('sticky-ad').style.display='flex';},4000);
 </script>
 </body>
 </html>
