@@ -15,7 +15,6 @@
 /tools/id-card-to-pdf    /tools/id-card-to-pdf.html   200
 /tools/photo-to-pdf      /tools/photo-to-pdf.html     200
 /tools/ai-detector       /tools/ai-detector.html      200
-/tools/apa-formatter     /tools/apa-formatter.html    200
 /privacy                 /privacy.html                200
 # 404 fallback
 /*                        /index.html                 200
