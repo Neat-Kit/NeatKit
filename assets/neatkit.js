@@ -109,7 +109,7 @@ function nkSEO({ title, desc, path }) {
   document.querySelector('meta[name="description"]')?.setAttribute('content', desc);
   document.querySelector('meta[property="og:title"]')?.setAttribute('content', title + ' — Neatkit');
   document.querySelector('meta[property="og:description"]')?.setAttribute('content', desc);
-  document.querySelector('link[rel="canonical"]')?.setAttribute('href', 'https://neatkit.tools' + path);
+  document.querySelector('link[rel="canonical"]')?.setAttribute('href', 'https://neatkitapp.com' + path);
 }
 
 // ── DEBOUNCE ───────────────────────────────────────────────
@@ -126,7 +126,7 @@ function nkStructuredData(toolName, desc, url) {
     "@type": "SoftwareApplication",
     "name": toolName,
     "description": desc,
-    "url": "https://neatkit.tools" + url,
+    "url": "https://neatkitapp.com" + url,
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Web",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
